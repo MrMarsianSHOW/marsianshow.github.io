@@ -1,2 +1,2 @@
 # [Таблица с айди][index.html]
-[index.html]: https://marsianshow.github.io/
+[index.html]: https://mrmarsianshow.github.io/
