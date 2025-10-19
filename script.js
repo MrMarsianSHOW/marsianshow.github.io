@@ -5,16 +5,16 @@ $(document).ready(function ($) {
     },
     ajax: {
       type: 'GET',
-      url: 'https://marsianshow.github.io/marsianshow.json',
+      url: 'https://mrmarsianshow.github.io/mrmarsianshow.json',
     },
     columns: [
       {
         width: '20%',
         data: 'ID',
         render: function (data) {
-          return ('<img loading="lazy" height="50px" class="image" src="https://marsianshow.github.io/images/' 
+          return ('<img loading="lazy" height="50px" class="image" src="https://mrmarsianshow.github.io/images/' 
             + data
-            + ".png\" tooltip title=\"<img height='140px' src='https://marsianshow.github.io/images/" 
+            + ".png\" tooltip title=\"<img height='140px' src='https://mrmarsianshow.github.io/images/" 
             + data 
             + ".png' alt='Item'>\">");
         },
