@@ -257,6 +257,49 @@
     }
 
     @media (max-width: 600px) {
+      /* Header grows to accommodate stacked content */
+      header {
+        height: auto;
+        min-height: 88px;
+      }
+
+      /* Stack topnav content and allow wrapping */
+      .topnav {
+        flex-wrap: wrap;
+        padding: 8px 10px;
+        gap: 6px;
+      }
+
+      /* Keep buttons compact on mobile */
+      .custom-button {
+        padding: 8px 10px;
+        font-size: 14px;
+      }
+
+      /* Move search below buttons and make it full-width */
+      .form-group {
+        flex-basis: 100%;
+        order: 10;
+        width: 100%;
+        max-width: none;
+        margin-top: 6px;
+      }
+      #search {
+        width: 100%;
+        max-width: 100%;
+        font-size: 14px;
+        padding: 6px 8px;
+      }
+
+      /* Reposition theme toggle to avoid overlap */
+      .toggle-container {
+        position: static;
+        transform: none;
+        margin-left: auto;
+        order: 2;
+      }
+
+      /* Table readability tweaks */
       .table { 
         font-size: 12px; 
       }
@@ -267,17 +310,10 @@
       .image {
         height: 48px !important;
       }
-      .custom-button {
-        padding: 8px 10px;
-        font-size: 14px;
-      }
-      .form-group {
-        max-width: 180px;
-      }
-      #search {
-        max-width: 100%;
-        font-size: 14px;
-        padding: 6px 8px;
+
+      /* Push table down to clear taller header */
+      .base_dataTable {
+        margin-top: 140px;
       }
     }
   </style>
