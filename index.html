@@ -128,6 +128,7 @@
       width: fit-content; /* Adjust width as needed */
       max-width: 100%;
       overflow-x: auto;
+      overflow-y: hidden; /* hide vertical scrollbar inside table container */
       -webkit-overflow-scrolling: touch;
       display: none;
     }
@@ -299,7 +300,7 @@
   </header>
 
   <div class="base_dataTable">
-    <table id="display_json_data" class="table table-bordered table-striped table-vcenter dataTable no-footer">
+    <table id="display_json_data" class="table table-bordered table-striped">
       <thead>
         <tr>
           <th>Photo</th>
@@ -451,50 +452,6 @@
   </script>
 </body>
 
-</html>
-
-.toggle-container {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  z-index: 100;
-  border: 2px solid #ccc; /* Добавляем границу */
-  border-radius: 5px; /* Скругляем углы */
-  padding: 5px; /* Добавляем отступы */
-}
-
-
-
-.table th:nth-child(2), .table td:nth-child(2) {
-  min-width: 100px;
-  width: 100px;
-}
-
-@media (max-width: 600px) {
-  .table { 
-    font-size: 12px; 
-  }
-  .table td, .table th {
-    padding: 0 !important;
-    line-height: 1.1;
-  }
-  .image {
-    height: 48px !important;
-  }
-  .custom-button {
-    padding: 8px 10px;
-    font-size: 14px;
-  }
-  .form-group {
-    max-width: 180px;
-  }
-  #search {
-    max-width: 100%;
-    font-size: 14px;
-    padding: 6px 8px;
-  }
-}
-</body>
 </html>
 
 
