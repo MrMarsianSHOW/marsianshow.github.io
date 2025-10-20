@@ -433,6 +433,24 @@
 
 </html>
 
+/* Стили для мобильных устройств */
+@media (max-width: 768px) {
+  .base_dataTable {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .table {
+    width: 100%;
+    min-width: 320px; /* Минимальная ширина таблицы для телефонов */
+  }
+
+  .table td, .table th {
+    white-space: nowrap;
+  }
+}
+
 /* Добавляем адаптивные стили для изображений */
 .table td img {
   max-width: 100% !important;
