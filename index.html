@@ -204,6 +204,14 @@
       color: #ffffff !important;
     }
 
+    /* ID column: auto width with breathing room */
+    #display_json_data th:nth-child(2),
+    #display_json_data td:nth-child(2) {
+      padding-left: 12px;
+      padding-right: 12px;
+      min-width: 7ch;
+    }
+
     /* Modal Styles */
     .modal {
       display: none; /* Hidden by default */
