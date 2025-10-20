@@ -126,6 +126,9 @@
     .base_dataTable {
       margin-top: 90px;
       width: fit-content; /* Adjust width as needed */
+      max-width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
       display: none;
     }
 
@@ -135,6 +138,8 @@
     }
 
     .table {
+      width: 1%;
+      white-space: nowrap;
       background-color: var(--bg-color);
       color: var(--text-color);
       border-color: var(--table-border-color);
@@ -144,6 +149,9 @@
       background-color: var(--table-header-bg);
       color: var(--table-header-color);
       border-color: var(--table-border-color);
+      padding: 0;
+      text-align: center !important;
+      vertical-align: middle;
     }
 
     .table tbody tr {
@@ -153,6 +161,12 @@
 
     .table tbody tr:hover {
       background-color: var(--table-row-hover-bg);
+    }
+
+    .table td, .table th {
+        padding: 0;
+        text-align: center;
+        vertical-align: middle;
     }
 
     body.dark-mode .base_dataTable * {
@@ -177,28 +191,12 @@
       transform: translateY(-50%);
     }
 
-    .toggle-container {
-      position: relative;
-      right: 0px;
-      top: 0px;
-      transform: translateY(0%);
-      display: flex;
-      align-items: center;
-      height: 38px; /* Match the height of the input */
-      margin-left: 10px; /* Add some space between search and toggle */
-    }
-
     .toggle-container .btn {
       background: none;
-      border: 1px solid var(--input-border-color); /* Add border to match input */
+      border: none;
       font-size: 24px;
       cursor: pointer;
       color: var(--text-color);
-      height: 100%; /* Make button fill the container height */
-      padding: 0 10px; /* Adjust padding as needed */
-      display: flex;
-      align-items: center;
-      justify-content: center;
     }
 
     body.dark-mode .table td, body.dark-mode .table th {
@@ -256,6 +254,31 @@
       color: white;
       border: none;
     }
+
+    @media (max-width: 600px) {
+      .table { 
+        font-size: 12px; 
+      }
+      .table td, .table th {
+        padding: 0 !important;
+        line-height: 1.1;
+      }
+      .image {
+        height: 48px !important;
+      }
+      .custom-button {
+        padding: 8px 10px;
+        font-size: 14px;
+      }
+      .form-group {
+        max-width: 180px;
+      }
+      #search {
+        max-width: 100%;
+        font-size: 14px;
+        padding: 6px 8px;
+      }
+    }
   </style>
 </head>
 
@@ -270,9 +293,7 @@
         <input type="text" class="form-control" id="search" placeholder="Поиск по таблице">
       </div>
       <div class="toggle-container">
-        <button id="theme-toggle" class="btn">
-          <img id="theme-icon" src="ImagesVehicle/ImageSite/moon.png" alt="Theme icon" style="width: 24px; height: 24px;">
-        </button>
+        <img id="theme-icon" src="ImagesVehicle/ImageSite/sun.png" alt="Theme Icon" style="cursor: pointer; width: 24px; height: 24px;">
       </div>
     </div>
   </header>
@@ -308,7 +329,6 @@
   <script>
     $(document).ready(function () {
       // Theme toggle functionality
-      const themeToggleBtn = document.getElementById('theme-toggle');
       const themeIcon = document.getElementById('theme-icon');
       const body = document.body;
 
@@ -321,9 +341,9 @@
       if (savedTheme) {
         body.classList.add(savedTheme);
         if (savedTheme === 'dark-mode') {
-          themeIcon.src = 'ImagesVehicle/ImageSite/sun.png';
-        } else {
           themeIcon.src = 'ImagesVehicle/ImageSite/moon.png';
+        } else {
+          themeIcon.src = 'ImagesVehicle/ImageSite/sun.png';
         }
       } else {
         // Show modal if no theme is saved
@@ -336,9 +356,9 @@
         body.classList.add(theme);
         localStorage.setItem('theme', theme);
         if (theme === 'dark-mode') {
-          themeIcon.src = 'ImagesVehicle/ImageSite/sun.png';
-        } else {
           themeIcon.src = 'ImagesVehicle/ImageSite/moon.png';
+        } else {
+          themeIcon.src = 'ImagesVehicle/ImageSite/sun.png';
         }
         themeSelectionModal.style.display = 'none'; // Hide modal after selection
       }
@@ -346,7 +366,7 @@
       selectLightModeBtn.addEventListener('click', () => setTheme('light-mode'));
       selectDarkModeBtn.addEventListener('click', () => setTheme('dark-mode'));
 
-      themeToggleBtn.addEventListener('click', () => {
+      themeIcon.addEventListener('click', () => {
         if (body.classList.contains('light-mode')) {
           setTheme('dark-mode');
         } else {
@@ -401,7 +421,7 @@
             || data[i].Type == "Medium"
             || data[i].Type == "Decal") continue;
           allRecordsHTML += '<tr>';
-          allRecordsHTML += '<td>' + '<img height="100" class="image" src="https://mrmarsianshow.github.io/images/' + data[i].ID + '.png" onerror=\'this.style.display = "none"\' alt=" "/>' + '</td>';
+          allRecordsHTML += '<td>' + '<img loading="lazy" height="100" class="image" src="https://mrmarsianshow.github.io/images/' + data[i].ID + '.png" onerror=\'this.style.display = "none"\' alt=" "/>' + '</td>';
           allRecordsHTML += '<td>' + data[i].ID + '</td>';
           allRecordsHTML += '<td>' + data[i].Name + '</td>';
           allRecordsHTML += '</tr>';
@@ -418,7 +438,7 @@
         $("#dataTable").empty(); // Очищает таблицу Eternal/Original
         for (var i = 0; i < data.length; i++) {
           carsRecordsHTML += '<tr>';
-          carsRecordsHTML += '<td>' + '<img height="100" class="image" src="https://mrmarsianshow.github.io/ImagesVehicle/' + data[i].ID + '.png" onerror=\'this.style.display = "none"\' alt=" "/>' + '</td>';
+          carsRecordsHTML += '<td>' + '<img loading="lazy" height="100" class="image" src="https://mrmarsianshow.github.io/ImagesVehicle/' + data[i].ID + '.png" onerror=\'this.style.display = "none"\' alt=" "/>' + '</td>';
           carsRecordsHTML += '<td>' + data[i].ID + '</td>';
           carsRecordsHTML += '<td>' + data[i].Name + '</td>';
           carsRecordsHTML += '</tr>';
@@ -433,27 +453,48 @@
 
 </html>
 
-/* Стили для мобильных устройств */
-@media (max-width: 768px) {
-  .base_dataTable {
-    width: 100%;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-  }
+.toggle-container {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 100;
+  border: 2px solid #ccc; /* Добавляем границу */
+  border-radius: 5px; /* Скругляем углы */
+  padding: 5px; /* Добавляем отступы */
+}
 
-  .table {
-    width: 100%;
-    min-width: 320px; /* Минимальная ширина таблицы для телефонов */
-  }
 
+
+.table th:nth-child(2), .table td:nth-child(2) {
+  min-width: 100px;
+  width: 100px;
+}
+
+@media (max-width: 600px) {
+  .table { 
+    font-size: 12px; 
+  }
   .table td, .table th {
-    white-space: nowrap;
+    padding: 0 !important;
+    line-height: 1.1;
+  }
+  .image {
+    height: 48px !important;
+  }
+  .custom-button {
+    padding: 8px 10px;
+    font-size: 14px;
+  }
+  .form-group {
+    max-width: 180px;
+  }
+  #search {
+    max-width: 100%;
+    font-size: 14px;
+    padding: 6px 8px;
   }
 }
+</body>
+</html>
 
-/* Добавляем адаптивные стили для изображений */
-.table td img {
-  max-width: 100% !important;
-  height: auto !important;
-  object-fit: contain;
-}
+
